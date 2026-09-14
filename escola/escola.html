@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Início - Colégio Progresso</title>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    body {
+      background-color: #0f172a;
+      color: #f8fafc;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .header-nav {
+      background: #1e293b;
+      border-bottom: 2px solid #dc2626;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 12px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .logo-area h1 {
+      font-size: 1.2rem;
+      color: #dc2626;
+      font-weight: 800;
+    }
+
+    nav {
+      display: flex;
+      gap: 15px;
+    }
+
+    nav a {
+      color: #94a3b8;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+
+    nav a:hover, nav a.active {
+      color: #ffffff;
+    }
+
+    .btn-logout {
+      background: #dc2626;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 0.85rem;
+    }
+
+    .btn-logout:hover {
+      background: #b91c1c;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .welcome-card {
+      background: #1e293b;
+      padding: 25px;
+      border-radius: 16px;
+      border: 1px solid #334155;
+      margin-bottom: 20px;
+    }
+
+    .welcome-card h2 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      color: #f8fafc;
+    }
+
+    .welcome-card p {
+      color: #94a3b8;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .grid-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      padding: 20px;
+      border-radius: 12px;
+    }
+
+    .card h3 {
+      color: #dc2626;
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+    }
+
+    .card p {
+      color: #cbd5e1;
+      font-size: 0.85rem;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header class="header-nav">
+      <div class="logo-area">
+        <h1>🏫 COLÉGIO PROGRESSO</h1>
+      </div>
+      <nav>
+        <a href="inicio.html" class="active">Início</a>
+        <a href="escola.html">Painel</a>
+        <a href="horarios.html">Horários</a>
+      </nav>
+      <button onclick="logout()" class="btn-logout">Sair</button>
+    </header>
+
+    <main>
+      <div class="welcome-card">
+        <h2>Olá, <span id="nome-aluno">Aluno</span>! 👋</h2>
+        <p>Bem-vindo ao Portal Oficial do Colégio Progresso. Aqui você acompanha seus horários, avisos importantes e informações escolares com total segurança.</p>
+      </div>
+
+      <div class="grid-cards">
+        <div class="card">
+          <h3>📌 Avisos Recentes</h3>
+          <p>Fique atento às datas das avaliações e prazos de entrega no painel escolar.</p>
+        </div>
+        <div class="card">
+          <h3>⏰ Grade de Aulas</h3>
+          <p>Consulte sua tabela de horários semanais sempre atualizada.</p>
+        </div>
+        <div class="card">
+          <h3>🔒 Sessão Segura</h3>
+          <p>Sua conta está autenticada com proteção ativa de 30 minutos.</p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Validação Automática de Sessão
+    function verificarSessao() {
+      const sessao = JSON.parse(localStorage.getItem('sessao_ativa'));
+      
+      // Se não houver sessão ou ela expirar, expulsa para o login fora da pasta
+      if (!sessao || Date.now() > sessao.expiraEm) {
+        localStorage.removeItem('sessao_ativa');
+        window.location.href = "../index.html"; 
+        return;
+      }
+
+      // Exibe o nome do usuário logado
+      document.getElementById('nome-aluno').innerText = sessao.nome || 'Aluno';
+    }
+
+    function logout() {
+      localStorage.removeItem('sessao_ativa');
+      window.location.href = "../index.html";
+    }
+
+    window.onload = verificarSessao;
+  </script>
+
+</body>
+</html>

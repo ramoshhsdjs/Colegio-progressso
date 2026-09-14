@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Horários - Colégio Progresso</title>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    body {
+      background-color: #0f172a;
+      color: #f8fafc;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .header-nav {
+      background: #1e293b;
+      border-bottom: 2px solid #dc2626;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 12px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .logo-area h1 {
+      font-size: 1.2rem;
+      color: #dc2626;
+      font-weight: 800;
+    }
+
+    nav {
+      display: flex;
+      gap: 15px;
+    }
+
+    nav a {
+      color: #94a3b8;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+
+    nav a:hover, nav a.active {
+      color: #ffffff;
+    }
+
+    .btn-logout {
+      background: #dc2626;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 0.85rem;
+    }
+
+    .container {
+      max-width: 950px;
+      margin: 0 auto;
+    }
+
+    .selector-card {
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 16px;
+      border: 1px solid #334155;
+      margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .selector-card label {
+      font-weight: bold;
+      color: #cbd5e1;
+      font-size: 1rem;
+    }
+
+    .select-style {
+      background-color: #0f172a;
+      color: #ffffff;
+      border: 1px solid #dc2626;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: bold;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .table-container {
+      background: #1e293b;
+      border-radius: 16px;
+      border: 1px solid #334155;
+      padding: 20px;
+      overflow-x: auto;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: center;
+      min-width: 600px;
+    }
+
+    th {
+      background-color: #dc2626;
+      color: white;
+      padding: 12px;
+      font-size: 0.9rem;
+      border: 1px solid #334155;
+    }
+
+    td {
+      padding: 12px;
+      border: 1px solid #334155;
+      font-size: 0.85rem;
+      color: #cbd5e1;
+    }
+
+    tr:nth-child(even) {
+      background-color: #0f172a;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 0.75rem;
+    }
+
+    .tag-portugues { background: #1e40af; color: #93c5fd; }
+    .tag-matematica { background: #854d0e; color: #fef08a; }
+    .tag-estudo { background: #166534; color: #86efac; }
+    .tag-historia { background: #991b1b; color: #fca5a5; }
+    .tag-fisica { background: #6b21a8; color: #e9d5ff; }
+    .tag-intervalo { background: #334155; color: #94a3b8; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header class="header-nav">
+      <div class="logo-area">
+        <h1>🏫 COLÉGIO PROGRESSO</h1>
+      </div>
+      <nav>
+        <a href="inicio.html">Início</a>
+        <a href="escola.html">Painel</a>
+        <a href="horarios.html" class="active">Horários</a>
+      </nav>
+      <button onclick="logout()" class="btn-logout">Sair</button>
+    </header>
+
+    <!-- SELETOR DE CLASSE -->
+    <div class="selector-card">
+      <div>
+        <label for="select-classe">📌 Selecione a Classe:</label>
+      </div>
+      <select id="select-classe" class="select-style" onchange="mudarGrade()">
+        <option value="1">1ª Classe (Turno Único/Manhã)</option>
+        <option value="2-9">2ª até 9ª Classe (Grade Geral)</option>
+      </select>
+    </div>
+
+    <!-- TABELA DE HORÁRIOS -->
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Horário</th>
+            <th>Segunda</th>
+            <th>Terça</th>
+            <th>Quarta</th>
+            <th>Quinta</th>
+            <th>Sexta</th>
+          </tr>
+        </thead>
+        <tbody id="tabela-corpo">
+          <!-- O JavaScript vai preencher os dados aqui -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    // Validar Sessão Segura
+    function verificarSessao() {
+      const sessao = JSON.parse(localStorage.getItem('sessao_ativa'));
+      if (!sessao || Date.now() > sessao.expiraEm) {
+        localStorage.removeItem('sessao_ativa');
+        window.location.href = "../index.html";
+        return;
+      }
+      mudarGrade(); // Carrega o horário inicial
+    }
+
+    function logout() {
+      localStorage.removeItem('sessao_ativa');
+      window.location.href = "../index.html";
+    }
+
+    // Dados das Grades de Horário
+    const grade1Classe = `
+      <tr>
+        <td><b>08:00 - 08:45</b></td>
+        <td><span class="tag tag-portugues">L. Portuguesa</span></td>
+        <td><span class="tag tag-matematica">Matemática</span></td>
+        <td><span class="tag tag-portugues">L. Portuguesa</span></td>
+        <td><span class="tag tag-estudo">Estudo do Meio</span></td>
+        <td><span class="tag tag-matematica">Matemática</span></td>
+      </tr>
+      <tr>
+        <td><b>08:45 - 09:30</b></td>
+        <td><span class="tag tag-matematica">Matemática</span></td>
+        <td><span class="tag tag-estudo">Estudo do Meio</span></td>
+        <td><span class="tag tag-matematica">Matemática</span></td>
+        <td><span class="tag tag-portugues">L. Portuguesa</span></td>
+        <td><span class="tag tag-portugues">Ed. Artística</span></td>
+      </tr>
+      <tr>
+        <td><b>09:30 - 10:00</b></td>
+        <td colspan="5" class="tag-intervalo">☕ RECREIO / INTERVALO</td>
+      </tr>
+      <tr>
+        <td><b>10:00 - 10:45</b></td>
+        <td><span class="tag tag-estudo">Estudo do Meio</span></td>
+        <td><span class="tag tag-portugues">L. Portuguesa</span></td>
+        <td><span class="tag tag-estudo">Ed. Física</span></td>
+        <td><span class="tag tag-matematica">Matemática</span></td>
+        <td><span class="tag tag-estudo">Estudo do Meio</span></td>
+      </tr>
+    `;
+
+    const grade2A9Classe = `
+      <tr>
+        <td><b>07:30 - 08:20</b></td>
+        <td><span class="tag tag-matematica">Matemática</span></td>
+        <td><span class="tag tag-portugues">L. Portuguesa</span></td>
+        <td><span class="tag tag-fisica">Física / Química</span></td>
+        <td><span class="tag tag-historia">História</span></td>
+        <td><span class="tag tag-matematica">Matemática</span></td>
+      </tr>
+      <tr>
+        <td><b>08:20 - 09:10</b></td>
+        <td><span class="tag tag-portugues">L. Portuguesa</span></td>
+        <td><span class="tag tag-matematica">Matemática</span></td>
+        <td><span class="tag tag-historia">Geografia</span></td>
+        <td><span class="tag tag-fisica">Biologia</span></td>
+        <td><span class="tag tag-portugues">L. Portuguesa</span></td>
+      </tr>
+      <tr>
+        <td><b>09:10 - 09:30</b></td>
+        <td colspan="5" class="tag-intervalo">☕ RECREIO / INTERVALO</td>
+      </tr>
+      <tr>
+        <td><b>09:30 - 10:20</b></td>
+        <td><span class="tag tag-historia">História</span></td>
+        <td><span class="tag tag-fisica">Física</span></td>
+        <td><span class="tag tag-matematica">Matemática</span></td>
+        <td><span class="tag tag-portugues">Inglês</span></td>
+        <td><span class="tag tag-estudo">Ed. Física</span></td>
+      </tr>
+      <tr>
+        <td><b>10:20 - 11:10</b></td>
+        <td><span class="tag tag-estudo">Geografia</span></td>
+        <td><span class="tag tag-historia">Moral e Cívica</span></td>
+        <td><span class="tag tag-portugues">L. Portuguesa</span></td>
+        <td><span class="tag tag-matematica">Matemática</span></td>
+        <td><span class="tag tag-fisica">Química</span></td>
+      </tr>
+    `;
+
+    // Função para alterar os horários dinamicamente
+    function mudarGrade() {
+      const opcao = document.getElementById('select-classe').value;
+      const tabela = document.getElementById('tabela-corpo');
+
+      if (opcao === '1') {
+        tabela.innerHTML = grade1Classe;
+      } else {
+        tabela.innerHTML = grade2A9Classe;
+      }
+    }
+
+    window.onload = verificarSessao;
+  </script>
+
+</body>
+</html>
