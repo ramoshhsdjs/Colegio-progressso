@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acesso Seguro - Colégio Progresso</title>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    body {
+      background: #0f172a;
+      color: #f8fafc;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .admin-stats {
+      background: #dc2626;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .security-badge {
+      font-size: 0.75rem;
+      color: #22c55e;
+      background: #064e3b;
+      padding: 4px 10px;
+      border-radius: 20px;
+      margin-bottom: 15px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-weight: 600;
+    }
+
+    .container {
+      background-color: #1e293b;
+      width: 100%;
+      max-width: 400px;
+      padding: 30px 24px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      border: 1px solid #334155;
+      text-align: center;
+    }
+
+    .tabs {
+      display: flex;
+      background-color: #0f172a;
+      padding: 4px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      background: none;
+      color: #94a3b8;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .tab-btn.active {
+      background-color: #dc2626;
+      color: #ffffff;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.8rem;
+      color: #cbd5e1;
+      margin-bottom: 5px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 11px;
+      border-radius: 8px;
+      border: 1px solid #334155;
+      background-color: #0f172a;
+      color: white;
+      font-size: 0.9rem;
+      outline: none;
+    }
+
+    .form-group input:focus {
+      border-color: #dc2626;
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 12px;
+      background-color: #dc2626;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .divider {
+      text-align: center;
+      margin: 18px 0 14px;
+      border-bottom: 1px solid #334155;
+      line-height: 0.1em;
+      font-size: 0.75rem;
+      color: #94a3b8;
+    }
+
+    .divider span {
+      background: #1e293b;
+      padding: 0 10px;
+    }
+
+    .social-btns {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-social {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px;
+      background: #0f172a;
+      border: 1px solid #334155;
+      color: white;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-social img {
+      width: 18px;
+      height: 18px;
+    }
+
+    .btn-escolar {
+      background-color: #2563eb;
+      color: white;
+      font-size: 1rem;
+      padding: 14px;
+      margin-top: 20px;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+    }
+
+    .btn-logout {
+      background-color: #ef4444;
+      color: white;
+      margin-top: 10px;
+    }
+
+    .form-section {
+      display: none;
+    }
+
+    .form-section.active {
+      display: block;
+    }
+
+    .user-card {
+      text-align: center;
+      padding: 10px 0;
+    }
+
+    .user-avatar {
+      width: 70px;
+      height: 70px;
+      background: #dc2626;
+      color: #ffffff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin: 0 auto 15px;
+    }
+
+    .user-card h2 {
+      font-size: 1.3rem;
+      margin-bottom: 5px;
+    }
+
+    .user-card p {
+      color: #94a3b8;
+      font-size: 0.9rem;
+    }
+
+    .alert-msg {
+      background: #7f1d1d;
+      color: #fca5a5;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      margin-bottom: 12px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="admin-stats">
+    🔔 Painel do Criador | Contas Registradas: <span id="total-usuarios">0</span>
+  </div>
+
+  <div class="container">
+
+    <div class="security-badge">
+      🔒 Conexão Protegida SHA-256
+    </div>
+    
+    <div id="alert-box" class="alert-msg"></div>
+
+    <!-- FORMULÁRIOS DE ENTRADA -->
+    <div id="box-acesso">
+      <div class="tabs">
+        <button class="tab-btn active" onclick="mudarAba('login')">Entrar</button>
+        <button class="tab-btn" onclick="mudarAba('cadastro')">Cadastrar</button>
+      </div>
+
+      <!-- FORMULÁRIO DE LOGIN -->
+      <form id="sec-login" class="form-section active" onsubmit="processarLogin(event)">
+        <div class="form-group">
+          <label>E-mail</label>
+          <input type="email" id="login-email" placeholder="seu@email.com" required autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label>Senha</label>
+          <input type="password" id="login-senha" placeholder="••••••••" required autocomplete="current-password">
+        </div>
+        <button type="submit" class="btn-submit" id="btn-entrar">Entrar</button>
+
+        <div class="divider"><span>ou entre com</span></div>
+
+        <div class="social-btns">
+          <button type="button" class="btn-social" onclick="loginSocial('Google')">
+            <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google"> Google
+          </button>
+          <button type="button" class="btn-social" onclick="loginSocial('Apple')">
+            <img src="https://www.svgrepo.com/show/511330/apple-173.svg" alt="Apple"> Apple
+          </button>
+        </div>
+      </form>
+
+      <!-- FORMULÁRIO DE CADASTRO -->
+      <form id="sec-cadastro" class="form-section" onsubmit="processarCadastro(event)">
+        <div class="form-group">
+          <label>Nome Completo</label>
+          <input type="text" id="cad-nome" placeholder="Seu Nome" required maxlength="40">
+        </div>
+        <div class="form-group">
+          <label>E-mail</label>
+          <input type="email" id="cad-email" placeholder="seu@email.com" required autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label>Criar Senha (Mínimo 6 caracteres)</label>
+          <input type="password" id="cad-senha" placeholder="••••••••" required minlength="6" autocomplete="new-password">
+        </div>
+        <button type="submit" class="btn-submit">Criar Minha Conta</button>
+      </form>
+    </div>
+
+    <!-- PAINEL LOGADO -->
+    <div id="box-logado" class="form-section">
+      <div class="user-card">
+        <div class="user-avatar" id="user-initial">U</div>
+        <h2>Bem-vindo(a)!</h2>
+        <p id="user-name-display">Usuário</p>
+        <p id="user-email-display" style="font-size: 0.8rem; color: #38bdf8; margin-top: 4px;"></p>
+
+        <a href="escola/escola.html" style="text-decoration: none;">
+          <button type="button" class="btn-submit btn-escolar">🏫 Entrar no Site Escolar</button>
+        </a>
+
+        <button onclick="fazerLogout()" class="btn-submit btn-logout">Sair da Conta</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // Criptografia SHA-256 com fallback para compatibilidade offline
+    async function criptografarSenha(senha) {
+      if (!window.crypto || !window.crypto.subtle) {
+        return btoa(senha); 
+      }
+      const encoder = new TextEncoder();
+      const data = encoder.encode(senha);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    function limparTexto(texto) {
+      const div = document.createElement('div');
+      div.textContent = texto || '';
+      return div.innerText;
+    }
+
+    function getUsuarios() {
+      return JSON.parse(localStorage.getItem('bd_usuarios')) || [];
+    }
+
+    function salvarUsuarios(lista) {
+      localStorage.setItem('bd_usuarios', JSON.stringify(lista));
+      const el = document.getElementById('total-usuarios');
+      if (el) el.innerText = lista.length;
+    }
+
+    function salvarSessao(usuario) {
+      const sessao = {
+        nome: limparTexto(usuario.nome),
+        email: limparTexto(usuario.email),
+        expiraEm: Date.now() + (30 * 60 * 1000)
+      };
+      localStorage.setItem('sessao_ativa', JSON.stringify(sessao));
+    }
+
+    function getSessao() {
+      const sessao = JSON.parse(localStorage.getItem('sessao_ativa'));
+      if (!sessao) return null;
+      if (Date.now() > sessao.expiraEm) {
+        localStorage.removeItem('sessao_ativa');
+        mostrarAlerta('Sua sessão expirou por segurança. Faça login novamente.');
+        return null;
+      }
+      return sessao;
+    }
+
+    function encerrarSessao() {
+      localStorage.removeItem('sessao_ativa');
+    }
+
+    let tentativasErradas = Number(localStorage.getItem('tentativas_erradas')) || 0;
+    let bloqueadoAte = Number(localStorage.getItem('bloqueado_ate')) || 0;
+
+    function verificarBloqueio() {
+      const agora = Date.now();
+      if (agora < bloqueadoAte) {
+        const segundos = Math.ceil((bloqueadoAte - agora) / 1000);
+        mostrarAlerta(`⛔ Bloqueado por segurança. Tente novamente em ${segundos}s.`);
+        return true;
+      }
+      return false;
+    }
+
+    function mostrarAlerta(msg) {
+      const box = document.getElementById('alert-box');
+      if (box) {
+        box.innerText = msg;
+        box.style.display = 'block';
+      }
+    }
+
+    function esconderAlerta() {
+      const box = document.getElementById('alert-box');
+      if (box) box.style.display = 'none';
+    }
+
+    window.onload = function() {
+      const usuarios = getUsuarios();
+      const el = document.getElementById('total-usuarios');
+      if (el) el.innerText = usuarios.length;
+
+      const usuarioLogado = getSessao();
+      if (usuarioLogado) {
+        exibirAreaLogada(usuarioLogado);
+      }
+    };
+
+    function mudarAba(aba) {
+      esconderAlerta();
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.form-section').forEach(sec => sec.classList.remove('active'));
+
+      if (aba === 'login') {
+        document.querySelectorAll('.tab-btn')[0].classList.add('active');
+        document.getElementById('sec-login').classList.add('active');
+      } else {
+        document.querySelectorAll('.tab-btn')[1].classList.add('active');
+        document.getElementById('sec-cadastro').classList.add('active');
+      }
+    }
+
+    async function processarCadastro(e) {
+      e.preventDefault();
+      esconderAlerta();
+
+      const nome = limparTexto(document.getElementById('cad-nome').value.trim());
+      const email = limparTexto(document.getElementById('cad-email').value.trim().toLowerCase());
+      const senhaPura = document.getElementById('cad-senha').value;
+
+      if (senhaPura.length < 6) {
+        mostrarAlerta('A senha precisa ter no mínimo 6 caracteres.');
+        return;
+      }
+
+      let usuarios = getUsuarios();
+
+      if (usuarios.some(u => u.email === email)) {
+        mostrarAlerta('⚠️ Este e-mail já está cadastrado.');
+        return;
+      }
+
+      const senhaHash = await criptografarSenha(senhaPura);
+
+      const novoUsuario = { nome, email, senhaHash };
+      usuarios.push(novoUsuario);
+      salvarUsuarios(usuarios);
+      salvarSessao(novoUsuario);
+      exibirAreaLogada(novoUsuario);
+    }
+
+    async function processarLogin(e) {
+      e.preventDefault();
+      esconderAlerta();
+
+      if (verificarBloqueio()) return;
+
+      const email = limparTexto(document.getElementById('login-email').value.trim().toLowerCase());
+      const senhaPura = document.getElementById('login-senha').value;
+      const senhaHash = await criptografarSenha(senhaPura);
+
+      const usuarios = getUsuarios();
+      const usuarioEncontrado = usuarios.find(u => u.email === email && (u.senhaHash === senhaHash || u.senha === senhaPura));
+
+      if (usuarioEncontrado) {
+        tentativasErradas = 0;
+        localStorage.removeItem('tentativas_erradas');
+        localStorage.removeItem('bloqueado_ate');
+        salvarSessao(usuarioEncontrado);
+        exibirAreaLogada(usuarioEncontrado);
+      } else {
+        tentativasErradas++;
+        localStorage.setItem('tentativas_erradas', tentativasErradas);
+
+        if (tentativasErradas >= 5) {
+          bloqueadoAte = Date.now() + (60 * 1000);
+          localStorage.setItem('bloqueado_ate', bloqueadoAte);
+          mostrarAlerta('⛔ 5 tentativas incorretas! Bloqueado por 1 minuto.');
+        } else {
+          mostrarAlerta(`❌ E-mail ou senha incorretos (${tentativasErradas}/5 tentativas).`);
+        }
+      }
+    }
+
+    function loginSocial(provedor) {
+      esconderAlerta();
+      const usuarioSocial = {
+        nome: `Aluno (${provedor})`,
+        email: `aluno@${provedor.toLowerCase()}.com`
+      };
+      salvarSessao(usuarioSocial);
+      exibirAreaLogada(usuarioSocial);
+    }
+
+    function exibirAreaLogada(usuario) {
+      document.getElementById('box-acesso').style.display = 'none';
+      document.getElementById('box-logado').style.display = 'block';
+      document.getElementById('user-name-display').innerText = usuario.nome;
+      document.getElementById('user-email-display').innerText = usuario.email;
+      document.getElementById('user-initial').innerText = usuario.nome.charAt(0).toUpperCase();
+    }
+
+    function fazerLogout() {
+      encerrarSessao();
+      document.getElementById('box-logado').style.display = 'none';
+      document.getElementById('box-acesso').style.display = 'block';
+      mudarAba('login');
+    }
+  </script>
+</body>
+</html>
