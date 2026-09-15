@@ -1,5 +1,4 @@
-
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
@@ -22,7 +21,6 @@
       flex-direction: column;
     }
 
-    /* TOPO BRANCO COM BORDA VERMELHA */
     header {
       background-color: #ffffff;
       border-bottom: 3px solid #dc2626;
@@ -72,7 +70,6 @@
       cursor: pointer;
     }
 
-    /* CONTEÚDO PRINCIPAL */
     main {
       flex: 1;
       padding: 20px;
@@ -109,7 +106,6 @@
       letter-spacing: 0.5px;
     }
 
-    /* GRID DE MENU COM BORDAS VERMELHAS */
     .menu-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -143,11 +139,6 @@
       font-weight: 700;
     }
 
-    /* CARD OCUPANDO LARGURA COMPLETA */
-    .full-width {
-      grid-column: span 2;
-    }
-
     footer {
       text-align: center;
       padding: 15px;
@@ -160,10 +151,9 @@
 </head>
 <body>
 
-  <!-- CABEÇALHO -->
   <header>
     <div class="logo-box">
-      <img src="logo.png" alt="Logo Colégio Progresso" class="logo-img" onerror="this.src='https://via.placeholder.com/60?text=CP'">
+      <img src="../logo.png" alt="Logo Colégio Progresso" class="logo-img" onerror="this.src='https://via.placeholder.com/60?text=CP'">
       <div class="school-info">
         <h1>COLÉGIO PROGRESSO</h1>
         <p>Portal Informativo</p>
@@ -173,7 +163,6 @@
     <button class="btn-voltar" onclick="voltarParaLogin()">Sair</button>
   </header>
 
-  <!-- CONTEÚDO PRINCIPAL -->
   <main>
     <div class="welcome-card">
       <h2>Bem-vindo(a) ao Colégio Progresso! 🎓</h2>
@@ -183,47 +172,48 @@
     <div class="menu-title">Navegação Geral</div>
 
     <div class="menu-grid">
-      <!-- Início -->
       <div class="menu-card" onclick="abrirSecao('inicio')">
         <div class="icon">🏫</div>
         <h3>Início</h3>
       </div>
 
-      <!-- Novidades -->
       <div class="menu-card" onclick="abrirSecao('novidades')">
         <div class="icon">📰</div>
         <h3>Novidades</h3>
       </div>
 
-      <!-- Avisos -->
       <div class="menu-card" onclick="abrirSecao('avisos')">
         <div class="icon">📢</div>
         <h3>Avisos</h3>
       </div>
 
-      <!-- Horários -->
       <div class="menu-card" onclick="abrirSecao('horarios')">
         <div class="icon">⏰</div>
         <h3>Horários</h3>
       </div>
 
-      <!-- Sugestões (Largura completa) -->
-      <div class="menu-card full-width" onclick="abrirSecao('sugestoes')">
+      <!-- Sugestões (E-mail oficial) -->
+      <div class="menu-card" onclick="abrirSecao('sugestoes')">
         <div class="icon">📬</div>
-        <h3>Sugestões (Enviar E-mail)</h3>
+        <h3>Sugestões (E-mail)</h3>
+      </div>
+
+      <!-- Ligação Telefônica -->
+      <div class="menu-card" onclick="window.location.href='tel:923131218'">
+        <div class="icon">📞</div>
+        <h3>Ligar (923 131 218)</h3>
       </div>
     </div>
   </main>
 
   <footer>
-    &copy; Colégio Progresso - Todos os direitos reservados.
+    &copy; Colégio Progresso - Feito pela Associação dos Estudantes (AECP)『мR』
   </footer>
 
   <script>
     function abrirSecao(secao) {
       if (secao === 'sugestoes') {
-        // Abre direto o aplicativo de e-mail do aluno
-        window.location.href = "mailto:contato@colegioprogresso.com?subject=Sugestão - Colégio Progresso";
+        window.location.href = "mailto:col.progresso20@hotmail.com?subject=Sugestão - Colégio Progresso";
       } else {
         window.location.href = secao + ".html";
       }
@@ -235,4 +225,5 @@
   </script>
 
 </body>
-</html>
+        </html>
+  
