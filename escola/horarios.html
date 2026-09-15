@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Horários - Colégio Progresso</title>
-  
+  <title>Colégio Progresso - Horários</title>
+
   <style>
     * {
       margin: 0;
@@ -14,293 +14,323 @@
     }
 
     body {
-      background-color: #0f172a;
-      color: #f8fafc;
+      background-color: #f8fafc;
+      color: #0f172a;
       min-height: 100vh;
-      padding: 20px;
+      display: flex;
+      flex-direction: column;
     }
 
-    .header-nav {
-      background: #1e293b;
-      border-bottom: 2px solid #dc2626;
+    /* CABEÇALHO IGUAL AO ESCOLA.HTML */
+    header {
+      background-color: #ffffff;
+      border-bottom: 3px solid #dc2626;
       padding: 15px 20px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      border-radius: 12px;
-      margin-bottom: 25px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      justify-content: space-between;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
     }
 
-    .logo-area h1 {
-      font-size: 1.2rem;
-      color: #dc2626;
-      font-weight: 800;
-    }
-
-    nav {
+    .logo-box {
       display: flex;
-      gap: 15px;
+      align-items: center;
+      gap: 12px;
     }
 
-    nav a {
-      color: #94a3b8;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.9rem;
-      transition: all 0.2s;
+    .logo-img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #dc2626;
     }
 
-    nav a:hover, nav a.active {
-      color: #ffffff;
+    .school-info h1 {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #dc2626;
     }
 
-    .btn-logout {
-      background: #dc2626;
+    .school-info p {
+      font-size: 0.75rem;
+      color: #1e3a8a;
+      font-weight: 700;
+    }
+
+    .btn-voltar {
+      background-color: #dc2626;
       color: white;
       border: none;
       padding: 8px 14px;
       border-radius: 8px;
-      cursor: pointer;
+      font-size: 0.8rem;
       font-weight: bold;
-      font-size: 0.85rem;
+      cursor: pointer;
     }
 
-    .container {
-      max-width: 950px;
+    main {
+      flex: 1;
+      padding: 20px;
+      max-width: 600px;
+      width: 100%;
       margin: 0 auto;
     }
 
-    .selector-card {
-      background: #1e293b;
-      padding: 20px;
-      border-radius: 16px;
-      border: 1px solid #334155;
-      margin-bottom: 20px;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-    }
-
-    .selector-card label {
-      font-weight: bold;
-      color: #cbd5e1;
-      font-size: 1rem;
-    }
-
-    .select-style {
-      background-color: #0f172a;
-      color: #ffffff;
-      border: 1px solid #dc2626;
-      padding: 10px 16px;
-      border-radius: 8px;
+    .section-title {
       font-size: 0.95rem;
+      color: #475569;
+      margin: 15px 0 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* 1. SELEÇÃO DO TIPO (PROVAS OU ESCOLARES) */
+    .tipo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .tipo-btn {
+      background-color: #ffffff;
+      border: 2px solid #dc2626;
+      border-radius: 12px;
+      padding: 14px;
       font-weight: bold;
-      outline: none;
-      cursor: pointer;
-    }
-
-    .table-container {
-      background: #1e293b;
-      border-radius: 16px;
-      border: 1px solid #334155;
-      padding: 20px;
-      overflow-x: auto;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      text-align: center;
-      min-width: 600px;
-    }
-
-    th {
-      background-color: #dc2626;
-      color: white;
-      padding: 12px;
       font-size: 0.9rem;
-      border: 1px solid #334155;
+      color: #dc2626;
+      cursor: pointer;
+      text-align: center;
+      transition: 0.2s;
     }
 
-    td {
-      padding: 12px;
-      border: 1px solid #334155;
-      font-size: 0.85rem;
-      color: #cbd5e1;
+    .tipo-btn.ativo {
+      background-color: #dc2626;
+      color: #ffffff;
     }
 
-    tr:nth-child(even) {
-      background-color: #0f172a;
+    /* 2. GRADE DO 1 AO 9 */
+    .classes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
     }
 
-    .tag {
-      display: inline-block;
-      padding: 4px 8px;
-      border-radius: 6px;
-      font-weight: bold;
+    .class-btn {
+      background-color: #ffffff;
+      border: 2px solid #dc2626;
+      border-radius: 10px;
+      padding: 12px 5px;
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: #0f172a;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .class-btn.ativo {
+      background-color: #fef2f2;
+      border-color: #991b1b;
+      color: #dc2626;
+    }
+
+    /* 3. ÁREA DE EXIBIÇÃO DA FOTO / AVISO */
+    .display-card {
+      background-color: #ffffff;
+      border: 2px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .display-card h3 {
+      font-size: 1rem;
+      color: #dc2626;
+      margin-bottom: 12px;
+    }
+
+    .img-horario {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      border: 1px solid #cbd5e1;
+    }
+
+    /* AVISO QUANDO NÃO TIVER FOTO */
+    .sem-foto {
+      color: #64748b;
+      font-size: 0.95rem;
+      font-weight: 600;
+      padding: 20px;
+      background-color: #f8fafc;
+      border: 2px dashed #cbd5e1;
+      border-radius: 10px;
+      width: 100%;
+    }
+
+    .sem-foto span {
+      display: block;
+      font-size: 2rem;
+      margin-bottom: 5px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
       font-size: 0.75rem;
+      color: #64748b;
+      border-top: 1px solid #e2e8f0;
+      background-color: #ffffff;
     }
-
-    .tag-portugues { background: #1e40af; color: #93c5fd; }
-    .tag-matematica { background: #854d0e; color: #fef08a; }
-    .tag-estudo { background: #166534; color: #86efac; }
-    .tag-historia { background: #991b1b; color: #fca5a5; }
-    .tag-fisica { background: #6b21a8; color: #e9d5ff; }
-    .tag-intervalo { background: #334155; color: #94a3b8; }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <header class="header-nav">
-      <div class="logo-area">
-        <h1>🏫 COLÉGIO PROGRESSO</h1>
+  <header>
+    <div class="logo-box">
+      <img src="../logo.png" alt="Logo" class="logo-img" onerror="this.src='https://via.placeholder.com/50?text=CP'">
+      <div class="school-info">
+        <h1>COLÉGIO PROGRESSO</h1>
+        <p>Horários e Calendários</p>
       </div>
-      <nav>
-        <a href="inicio.html">Início</a>
-        <a href="escola.html">Painel</a>
-        <a href="horarios.html" class="active">Horários</a>
-      </nav>
-      <button onclick="logout()" class="btn-logout">Sair</button>
-    </header>
+    </div>
+    <button class="btn-voltar" onclick="voltarMenu()">Voltar</button>
+  </header>
 
-    <!-- SELETOR DE CLASSE -->
-    <div class="selector-card">
-      <div>
-        <label for="select-classe">📌 Selecione a Classe:</label>
-      </div>
-      <select id="select-classe" class="select-style" onchange="mudarGrade()">
-        <option value="1">1ª Classe (Turno Único/Manhã)</option>
-        <option value="2-9">2ª até 9ª Classe (Grade Geral)</option>
-      </select>
+  <main>
+    <!-- PASSO 1: Escolher Tipo -->
+    <div class="section-title">1. Selecione a Opção</div>
+    <div class="tipo-grid">
+      <button class="tipo-btn ativo" id="btn-escolares" onclick="selecionarTipo('escolares')">
+        📅 Horários Escolares
+      </button>
+      <button class="tipo-btn" id="btn-provas" onclick="selecionarTipo('provas')">
+        📝 Horários de Prova
+      </button>
     </div>
 
-    <!-- TABELA DE HORÁRIOS -->
-    <div class="table-container">
-      <table>
-        <thead>
-          <tr>
-            <th>Horário</th>
-            <th>Segunda</th>
-            <th>Terça</th>
-            <th>Quarta</th>
-            <th>Quinta</th>
-            <th>Sexta</th>
-          </tr>
-        </thead>
-        <tbody id="tabela-corpo">
-          <!-- O JavaScript vai preencher os dados aqui -->
-        </tbody>
-      </table>
+    <!-- PASSO 2: Escolher a Classe (1 ao 9) -->
+    <div class="section-title">2. Selecione a Classe</div>
+    <div class="classes-grid">
+      <button class="class-btn ativo" id="c-1" onclick="selecionarClasse(1)">1ª Classe</button>
+      <button class="class-btn" id="c-2" onclick="selecionarClasse(2)">2ª Classe</button>
+      <button class="class-btn" id="c-3" onclick="selecionarClasse(3)">3ª Classe</button>
+      <button class="class-btn" id="c-4" onclick="selecionarClasse(4)">4ª Classe</button>
+      <button class="class-btn" id="c-5" onclick="selecionarClasse(5)">5ª Classe</button>
+      <button class="class-btn" id="c-6" onclick="selecionarClasse(6)">6ª Classe</button>
+      <button class="class-btn" id="c-7" onclick="selecionarClasse(7)">7ª Classe</button>
+      <button class="class-btn" id="c-8" onclick="selecionarClasse(8)">8ª Classe</button>
+      <button class="class-btn" id="c-9" onclick="selecionarClasse(9)">9ª Classe</button>
     </div>
-  </div>
+
+    <!-- PASSO 3: Resultado (Foto ou Mensagem) -->
+    <div class="display-card">
+      <h3 id="titulo-horario">Horário Escolar - 1ª Classe</h3>
+      <div id="conteudo-horario" style="width: 100%;">
+        <!-- Vai ser preenchido dinamicamente pelo JavaScript -->
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    &copy; Colégio Progresso - Todos os direitos reservados.
+  </footer>
 
   <script>
-    // Validar Sessão Segura
-    function verificarSessao() {
-      const sessao = JSON.parse(localStorage.getItem('sessao_ativa'));
-      if (!sessao || Date.now() > sessao.expiraEm) {
-        localStorage.removeItem('sessao_ativa');
-        window.location.href = "../index.html";
-        return;
+    // VARIAVEL COM OS CAMINHOS DAS FOTOS (Coloque o nome da imagem quando tiver uma)
+    // Se deixar "" (vazio), o sistema mostra automaticamente "Ainda não foi adicionado"
+    const imagensHorarios = {
+      escolares: {
+        1: "", // Exemplo de uso futuro: "fotos/escolar_1.jpg"
+        2: "",
+        3: "",
+        4: "",
+        5: "",
+        6: "",
+        7: "",
+        8: "",
+        9: ""
+      },
+      provas: {
+        1: "",
+        2: "",
+        3: "",
+        4: "",
+        5: "",
+        6: "",
+        7: "",
+        8: "",
+        9: ""
       }
-      mudarGrade(); // Carrega o horário inicial
-    }
+    };
 
-    function logout() {
-      localStorage.removeItem('sessao_ativa');
-      window.location.href = "../index.html";
-    }
+    let tipoAtual = 'escolares';
+    let classeAtual = 1;
 
-    // Dados das Grades de Horário
-    const grade1Classe = `
-      <tr>
-        <td><b>08:00 - 08:45</b></td>
-        <td><span class="tag tag-portugues">L. Portuguesa</span></td>
-        <td><span class="tag tag-matematica">Matemática</span></td>
-        <td><span class="tag tag-portugues">L. Portuguesa</span></td>
-        <td><span class="tag tag-estudo">Estudo do Meio</span></td>
-        <td><span class="tag tag-matematica">Matemática</span></td>
-      </tr>
-      <tr>
-        <td><b>08:45 - 09:30</b></td>
-        <td><span class="tag tag-matematica">Matemática</span></td>
-        <td><span class="tag tag-estudo">Estudo do Meio</span></td>
-        <td><span class="tag tag-matematica">Matemática</span></td>
-        <td><span class="tag tag-portugues">L. Portuguesa</span></td>
-        <td><span class="tag tag-portugues">Ed. Artística</span></td>
-      </tr>
-      <tr>
-        <td><b>09:30 - 10:00</b></td>
-        <td colspan="5" class="tag-intervalo">☕ RECREIO / INTERVALO</td>
-      </tr>
-      <tr>
-        <td><b>10:00 - 10:45</b></td>
-        <td><span class="tag tag-estudo">Estudo do Meio</span></td>
-        <td><span class="tag tag-portugues">L. Portuguesa</span></td>
-        <td><span class="tag tag-estudo">Ed. Física</span></td>
-        <td><span class="tag tag-matematica">Matemática</span></td>
-        <td><span class="tag tag-estudo">Estudo do Meio</span></td>
-      </tr>
-    `;
+    function atualizarTela() {
+      // Atualiza botões do tipo
+      document.getElementById('btn-escolares').classList.toggle('ativo', tipoAtual === 'escolares');
+      document.getElementById('btn-provas').classList.toggle('ativo', tipoAtual === 'provas');
 
-    const grade2A9Classe = `
-      <tr>
-        <td><b>07:30 - 08:20</b></td>
-        <td><span class="tag tag-matematica">Matemática</span></td>
-        <td><span class="tag tag-portugues">L. Portuguesa</span></td>
-        <td><span class="tag tag-fisica">Física / Química</span></td>
-        <td><span class="tag tag-historia">História</span></td>
-        <td><span class="tag tag-matematica">Matemática</span></td>
-      </tr>
-      <tr>
-        <td><b>08:20 - 09:10</b></td>
-        <td><span class="tag tag-portugues">L. Portuguesa</span></td>
-        <td><span class="tag tag-matematica">Matemática</span></td>
-        <td><span class="tag tag-historia">Geografia</span></td>
-        <td><span class="tag tag-fisica">Biologia</span></td>
-        <td><span class="tag tag-portugues">L. Portuguesa</span></td>
-      </tr>
-      <tr>
-        <td><b>09:10 - 09:30</b></td>
-        <td colspan="5" class="tag-intervalo">☕ RECREIO / INTERVALO</td>
-      </tr>
-      <tr>
-        <td><b>09:30 - 10:20</b></td>
-        <td><span class="tag tag-historia">História</span></td>
-        <td><span class="tag tag-fisica">Física</span></td>
-        <td><span class="tag tag-matematica">Matemática</span></td>
-        <td><span class="tag tag-portugues">Inglês</span></td>
-        <td><span class="tag tag-estudo">Ed. Física</span></td>
-      </tr>
-      <tr>
-        <td><b>10:20 - 11:10</b></td>
-        <td><span class="tag tag-estudo">Geografia</span></td>
-        <td><span class="tag tag-historia">Moral e Cívica</span></td>
-        <td><span class="tag tag-portugues">L. Portuguesa</span></td>
-        <td><span class="tag tag-matematica">Matemática</span></td>
-        <td><span class="tag tag-fisica">Química</span></td>
-      </tr>
-    `;
+      // Atualiza botões das classes (1 ao 9)
+      for (let i = 1; i <= 9; i++) {
+        const btn = document.getElementById(`c-${i}`);
+        if (btn) btn.classList.toggle('ativo', i === classeAtual);
+      }
 
-    // Função para alterar os horários dinamicamente
-    function mudarGrade() {
-      const opcao = document.getElementById('select-classe').value;
-      const tabela = document.getElementById('tabela-corpo');
+      // Atualiza o Título
+      const nomeTipo = tipoAtual === 'escolares' ? 'Horário Escolar' : 'Horário de Prova';
+      document.getElementById('titulo-horario').innerText = `${nomeTipo} - ${classeAtual}ª Classe`;
 
-      if (opcao === '1') {
-        tabela.innerHTML = grade1Classe;
+      // Busca a imagem no registro
+      const urlImagem = imagensHorarios[tipoAtual][classeAtual];
+      const areaConteudo = document.getElementById('conteudo-horario');
+
+      if (urlImagem && urlImagem.trim() !== "") {
+        areaConteudo.innerHTML = `<img src="${urlImagem}" alt="Foto do Horário" class="img-horario" onerror="mostrarMensagemVazio()">`;
       } else {
-        tabela.innerHTML = grade2A9Classe;
+        mostrarMensagemVazio();
       }
     }
 
-    window.onload = verificarSessao;
+    function mostrarMensagemVazio() {
+      const areaConteudo = document.getElementById('conteudo-horario');
+      areaConteudo.innerHTML = `
+        <div class="sem-foto">
+          <span>📷</span>
+          Ainda não foi adicionado
+        </div>
+      `;
+    }
+
+    function selecionarTipo(tipo) {
+      tipoAtual = tipo;
+      atualizarTela();
+    }
+
+    function selecionarClasse(numero) {
+      classeAtual = numero;
+      atualizarTela();
+    }
+
+    function voltarMenu() {
+      window.location.href = "escola.html";
+    }
+
+    // Inicializa a tela na primeira carregada
+    atualizarTela();
   </script>
 
 </body>
-</html>
+  </html>
+        
