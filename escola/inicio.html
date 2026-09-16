@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Colégio Progresso - Início</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    body {
+      background-color: #f8fafc;
+      color: #0f172a;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* CABEÇALHO PADRÃO */
+    header {
+      background-color: #ffffff;
+      border-bottom: 3px solid #dc2626;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .logo-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #dc2626;
+    }
+
+    .school-info h1 {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #dc2626;
+    }
+
+    .school-info p {
+      font-size: 0.75rem;
+      color: #1e3a8a;
+      font-weight: 700;
+    }
+
+    .btn-voltar {
+      background-color: #dc2626;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    main {
+      flex: 1;
+      padding: 20px;
+      max-width: 600px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .banner-card {
+      background: linear-gradient(135deg, #1e3a8a, #0f172a);
+      color: #ffffff;
+      border-radius: 16px;
+      padding: 22px;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 20px rgba(30, 58, 138, 0.2);
+    }
+
+    .banner-card h2 {
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+      color: #ffffff;
+    }
+
+    .banner-card p {
+      font-size: 0.88rem;
+      line-height: 1.4;
+      opacity: 0.95;
+    }
+
+    .info-card {
+      background-color: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-left: 4px solid #dc2626;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 14px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
+    }
+
+    .info-card h3 {
+      font-size: 0.95rem;
+      color: #dc2626;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .info-card p, .info-card ul {
+      font-size: 0.85rem;
+      color: #475569;
+      line-height: 1.5;
+    }
+
+    .info-card ul {
+      list-style-type: disc;
+      padding-left: 20px;
+      margin-top: 5px;
+    }
+
+    .section-title {
+      font-size: 0.95rem;
+      color: #475569;
+      margin: 20px 0 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .shortcut-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .shortcut-btn {
+      background-color: #ffffff;
+      border: 2px solid #dc2626;
+      border-radius: 12px;
+      padding: 12px 8px;
+      text-align: center;
+      cursor: pointer;
+      color: #0f172a;
+      font-weight: 700;
+      font-size: 0.8rem;
+      transition: transform 0.2s, background-color 0.2s;
+    }
+
+    .shortcut-btn:active {
+      transform: scale(0.96);
+      background-color: #fef2f2;
+    }
+
+    .shortcut-btn span {
+      display: block;
+      font-size: 1.4rem;
+      margin-bottom: 4px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      font-size: 0.75rem;
+      color: #64748b;
+      border-top: 1px solid #e2e8f0;
+      background-color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo-box">
+      <img src="../logo.png" alt="Logo Colégio Progresso" class="logo-img" onerror="this.src='https://via.placeholder.com/50?text=CP'">
+      <div class="school-info">
+        <h1>COLÉGIO PROGRESSO</h1>
+        <p>Página Inicial</p>
+      </div>
+    </div>
+    <button class="btn-voltar" onclick="voltarMenu()">Voltar</button>
+  </header>
+
+  <main>
+    <!-- Banner Principal -->
+    <div class="banner-card">
+      <h2>Bem-vindo ao Colégio Progresso 🏫</h2>
+      <p>Formando gerações com excelência académica, inovação e compromisso com o futuro dos nossos estudantes.</p>
+    </div>
+
+    <!-- Biografia / Sobre Nós -->
+    <div class="info-card">
+      <h3>📖 Sobre a Nossa Instituição</h3>
+      <p>
+        Fundado com o compromisso de transformar a educação e formar cidadãos exemplares, o <strong>Colégio Progresso</strong> dedica-se à formação integral de crianças e jovens desde a <strong>1ª à 9ª Classe</strong> (Ensino Primário e I Ciclo do Ensino Secundário).
+      </p>
+      <p style="margin-top: 8px;">
+        O nosso objetivo é proporcionar um ambiente seguro, disciplinado e acolhedor, onde o conhecimento científico, o rigor académico e os valores morais caminham lado a lado. Com uma equipa dedicada e a parceria ativa da <strong>Associação dos Estudantes (AECP)</strong>, trabalhamos diariamente para preparar cada aluno para os desafios do futuro.
+      </p>
+    </div>
+
+    <!-- Níveis de Ensino -->
+    <div class="info-card">
+      <h3>📚 Níveis de Ensino</h3>
+      <p>Atendemos alunos divididos entre o Ensino Primário e o I Ciclo do Ensino Secundário:</p>
+      <ul>
+        <li><strong>Ensino Primário:</strong> 1ª, 2ª, 3ª, 4ª, 5ª e 6ª Classe.</li>
+        <li><strong>I Ciclo:</strong> 7ª, 8ª e 9ª Classe.</li>
+      </ul>
+    </div>
+
+    <!-- Horários e Turnos -->
+    <div class="info-card">
+      <h3>⏰ Turnos de Funcionamento</h3>
+      <ul>
+        <li><strong>Turno da Manhã:</strong> 07:00 – 12:30</li>
+        <li><strong>Turno da Tarde:</strong> 13:00 – 17:30</li>
+      </ul>
+    </div>
+
+    <!-- Pilares -->
+    <div class="info-card">
+      <h3>🌟 Os Nossos Pilares</h3>
+      <ul>
+        <li><strong>Disciplina:</strong> Respeito às normas e compromisso com os estudos.</li>
+        <li><strong>Excelência:</strong> Busca contínua pelo alto rendimento escolar.</li>
+        <li><strong>União:</strong> Parceria sólida entre professores, encarregados e estudantes.</li>
+      </ul>
+    </div>
+
+    <!-- Atalhos Rápidos -->
+    <div class="section-title">Acesso Rápido</div>
+    <div class="shortcut-grid">
+      <div class="shortcut-btn" onclick="irPara('horarios.html')">
+        <span>⏰</span>
+        Horários
+      </div>
+      <div class="shortcut-btn" onclick="irPara('avisos.html')">
+        <span>📢</span>
+        Avisos
+      </div>
+      <div class="shortcut-btn" onclick="irPara('novidades.html')">
+        <span>📰</span>
+        Novidades
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    &copy; Colégio Progresso - Feito pela Associação dos Estudantes (AECP)『мR』
+  </footer>
+
+  <script>
+    function voltarMenu() {
+      window.location.href = "escola.html";
+    }
+
+    function irPara(pagina) {
+      window.location.href = pagina;
+    }
+  </script>
+
+</body>
+</html>
